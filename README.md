@@ -9,13 +9,16 @@ The course is organised in modules, one folder each. A module is a sequence of s
 build on one topic. Every exercise opens with a one-line docstring saying what it demonstrates, so the recommended way
 to study is: **read the script, predict its output, run it, then change it.**
 
+Each module folder has its own README: a full guide that explains every exercise, shows its expected output and
+suggests experiments to try.
+
 ## Contents
 
 - [Quick start](#quick-start)
 - [Modules at a glance](#modules-at-a-glance)
 - [Repository layout](#repository-layout)
 - [Working with the code](#working-with-the-code)
-- [Module guides](#module-guides)
+- [Module summaries](#module-summaries)
 - [Troubleshooting](#troubleshooting)
 - [License](#license)
 
@@ -46,18 +49,19 @@ Then run the commands above without the `uv run` prefix.
 
 ## Modules at a glance
 
-| # | Topic | You will practise | Python features |
+| Guide | Topic | You will practise | Python features |
 |---|---|---|---|
-| [01](#module-01-object-oriented-programming) | Object-oriented programming | encapsulation, inheritance, polymorphism, interfaces | properties, name mangling, `Enum`, `abc.ABC`, multiple inheritance |
-| [02](#module-02-functional-programming) | Functional programming | imperative vs. functional style, lazy pipelines | `filter`, `map`, `functools.reduce`, lambdas, generators, `itertools` |
-| [03](#module-03-unit-testing) | Unit testing | testing a small banking domain in isolation | pytest fixtures, parametrization, `pytest.raises`, pytest-mock, coverage |
-| [04](#module-04-files-and-serialization) | Files and serialization | storing the same data in six formats | `pathlib`, `pickle`, `json`, `csv`, pandas, Protocol Buffers |
+| [Module 01](module01/README.md) | Object-oriented programming | encapsulation, inheritance, polymorphism, interfaces | properties, name mangling, `Enum`, `abc.ABC`, multiple inheritance |
+| [Module 02](module02/README.md) | Functional programming | imperative vs. functional style, lazy pipelines | `filter`, `map`, `functools.reduce`, lambdas, generators, `itertools` |
+| [Module 03](module03/README.md) | Unit testing | testing a small banking domain in isolation | pytest fixtures, parametrization, `pytest.raises`, pytest-mock, coverage |
+| [Module 04](module04/README.md) | Files and serialization | storing the same data in six formats | `pathlib`, `pickle`, `json`, `csv`, pandas, Protocol Buffers |
 
 ## Repository layout
 
 ```text
 .
 ├── module01/                   object-oriented programming
+│   └── README.md               the module guide (every module has one)
 ├── module02/                   functional programming
 │   └── resources/              countries.json, movies.json
 ├── module03/                   unit testing
@@ -118,7 +122,9 @@ The exercises are written to a consistent style that you can copy in your own wo
 - **`pathlib` for data files**, resolved with `Path(__file__).parent`, never relative to the current directory.
 - **PEP 8 names**: `PascalCase` classes, `snake_case` functions and variables, `UPPER_CASE` constants.
 
-## Module guides
+## Module summaries
+
+A quick map of each module. Follow the links for the full guides.
 
 ### Module 01: Object-oriented programming
 
@@ -131,12 +137,7 @@ together enable **polymorphism**.
 | `exercise02.py` | **Inheritance and polymorphism.** `Square` and `Cube` override `area()` from a `TwoDimShape` → `ThreeDimShape` hierarchy; one loop treats them uniformly and uses `isinstance()` for the 3-D extras. |
 | `exercise03.py` | **Interfaces vs. abstract classes.** `Pet` is an interface (abstract members only, including an abstract `name` property); `Animal` is an abstract class with state and a concrete `walk()`. `Cat(Animal, Pet)` combines both. |
 
-**Try it**
-
-- In `exercise01.py`, add `acc1.balance -= 1_000_000`: a property without a setter raises `AttributeError`. Then
-  print `acc1._Account__balance` to see that name mangling only renames the attribute, it doesn't truly hide it.
-- In `exercise03.py`, call `Animal(4)`, or delete `Cat.play`, and read the `TypeError` that `abc` raises.
-- Add a `Circle` to `exercise02.py` without touching the loop in `main()`. That's polymorphism paying off.
+**Full guide:** [module01/README.md](module01/README.md), with class diagrams, expected output and experiments.
 
 ### Module 02: Functional programming
 
@@ -151,12 +152,8 @@ and `movies.json` (titles, years, genres, directors).
 | `exercise04.py` | **Composing predicates.** Drama movies from the 1970s, newest first, with nested `filter` calls and `sorted(key=…)`. |
 | `exercise05.py` | **Flatten and group.** Movies per genre, flattening with `itertools.chain.from_iterable` and counting with `reduce`. |
 
-**Try it**
-
-- In `exercise03.py`, make `bau_filter` build and return a list instead of yielding. Every `is_odd` call now happens
-  before `bau_map` even starts: the pipeline has become eager.
-- In `exercise02.py`, replace the `reduce` call with a generator expression inside `sum()`, and in `exercise05.py`
-  with `collections.Counter`. Which version reads best?
+**Full guide:** [module02/README.md](module02/README.md), with the datasets, an annotated trace of the lazy
+pipeline and experiments.
 
 ### Module 03: Unit testing
 
@@ -177,12 +174,8 @@ The code under test is the `banking` package:
 The suite covers 100% of the lines and branches in `banking`; the coverage command in
 [Running the tests](#running-the-tests) shows it.
 
-**Try it**
-
-- In `banking/account.py`, change `amount > available` to `amount >= available` in `withdraw()` and run the tests.
-  Three tests catch the off-by-one, among them `test_withdraw_should_decrease_balance`.
-- Re-run the coverage command with `--ignore=module03/tests/test_customer.py` added. `customer.py` drops to 79%, and
-  the `Missing` column lists the lines that only those tests reach.
+**Full guide:** [module03/README.md](module03/README.md), with the domain model, the business rules, each testing
+technique and how to read the coverage report.
 
 ### Module 04: Files and serialization
 
@@ -203,22 +196,8 @@ output paths are defined once, in [`module04/common.py`](module04/common.py), an
 > [!WARNING]
 > Unpickling can execute arbitrary code. Only load pickle files that you created or trust.
 
-**Try it**
-
-- Run all the writers and compare the file sizes in `resources/`. For the same data you should see roughly:
-  Protocol Buffers 197 B, pickle 226 B, text 237 B, CSV 287 B (with header), JSON 541 B (indented) and Excel about
-  5 KB.
-- Add a field to `employee.proto` and regenerate the code (see below). The existing `employees.bin` still parses,
-  and the new field reads as its default value. That's schema evolution.
-
-**Regenerating the Protocol Buffers code.** `employee_pb2.py` is generated from `employee.proto` and needs protobuf
-runtime 6.32.1 or newer. After changing the schema, regenerate it from inside `module04` (on Windows, the bundled
-`protoc.exe` works):
-
-```bash
-cd module04
-protoc --python_out=. employee.proto
-```
+**Full guide:** [module04/README.md](module04/README.md), with file modes, a format-by-format walkthrough, a
+size and type comparison, and how to regenerate the Protocol Buffers code.
 
 ## Troubleshooting
 
