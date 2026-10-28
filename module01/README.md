@@ -1,6 +1,6 @@
 # Module 01: Object-Oriented Programming
 
-[← Course overview](../README.md) · Next: [Module 02 →](../module02/README.md)
+[Course overview](../README.md) · [Module 02 →](../module02/README.md)
 
 Object-oriented programming organises code around objects that bundle **state** (attributes) with **behaviour**
 (methods). This module works through its three pillars:
