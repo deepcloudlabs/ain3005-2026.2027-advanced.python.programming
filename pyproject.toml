@@ -7,6 +7,9 @@ requires-python = ">=3.14"
 dependencies = [
     "openpyxl",
     "pandas",
+    "pytest",
+    "pytest-cov",
+    "pytest-mock",
     "protobuf>=6.32.1",
 ]
 
@@ -18,5 +21,5 @@ dev = [
 ]
 
 [tool.pytest.ini_options]
-pythonpath = ["module03"]
+pythonpath = [".", "module03"]
 testpaths = ["module03/tests"]

@@ -48,7 +48,7 @@ uv run pytest
 Add a coverage report for the `banking` package:
 
 ```bash
-uv run pytest --cov=banking --cov-report=term-missing
+uv run pytest --cov=module03/banking --cov-branch --cov-report=term-missing
 ```
 
 ## Modules
