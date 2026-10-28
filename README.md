@@ -94,6 +94,7 @@ modules 01–04.
 │   ├── employee.proto          Protocol Buffers schema
 │   ├── employee_pb2.py         generated from employee.proto (do not edit)
 │   ├── protoc.exe              Protocol Buffers compiler for Windows
+│   ├── protobuf/               Protocol Buffers examples from the lecture (Section 9)
 │   ├── requirements.txt
 │   └── resources/              files written and read by the exercises
 ├── pyproject.toml              dependencies and pytest settings
@@ -213,6 +214,7 @@ output paths are defined once, in [`module04/common.py`](module04/common.py), an
 | `exercise07.py` → `exercise08.py` | CSV | `csv.writer` with a header row, read back with `csv.DictReader`; every value is a `str`. |
 | `exercise09.py` → `exercise10.py` | Excel | A pandas `DataFrame` saved with `to_excel` (openpyxl engine) and loaded with `read_excel`. |
 | `exercise11.py` → `exercise12.py` | Protocol Buffers | A compact, schema-driven binary format defined in `employee.proto`. |
+| `protobuf/*.py` | Protocol Buffers in depth | The lecture's Section 9 examples: binary files, `repeated`/enum/`optional`, schema evolution and a grade-book exercise. Each script runs on its own. |
 
 > [!WARNING]
 > Unpickling can execute arbitrary code. Only load pickle files that you created or trust.
