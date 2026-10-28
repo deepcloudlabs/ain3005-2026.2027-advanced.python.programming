@@ -2,6 +2,8 @@
 
 [← Module 03](../module03/README.md) · [Course overview](../README.md)
 
+**Lecture notes:** [File Operations in Python](../lecture-notes/module04-file.operations.in.python.pdf) (PDF)
+
 Programs need to save data and load it later, or hand it to other programs. **Serialization** turns objects in memory
 into text or bytes; **deserialization** turns them back. This module writes the same seven employees in six formats,
 reads each file back, and looks at what survives the round trip.

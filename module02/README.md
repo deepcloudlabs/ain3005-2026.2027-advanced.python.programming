@@ -2,6 +2,8 @@
 
 [← Module 01](../module01/README.md) · [Course overview](../README.md) · [Module 03 →](../module03/README.md)
 
+**Lecture notes:** [Functional Programming in Python](../lecture-notes/module02-functional.programming.in.python.pdf) (PDF)
+
 Imperative code tells the computer **how** to get a result: loop, test, update a variable. Functional code describes
 **what** the result is, as a pipeline of transformations over data. Python supports both styles. Its functional
 toolkit includes first-class functions, lambdas, `filter`, `map`, `functools.reduce`, generators and `itertools`.

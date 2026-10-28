@@ -2,6 +2,8 @@
 
 [Course overview](../README.md) · [Module 02 →](../module02/README.md)
 
+**Lecture notes:** [Object-Oriented Programming in Python](../lecture-notes/module01-object-oriented.programming.in.python.pdf) (PDF)
+
 Object-oriented programming organises code around objects that bundle **state** (attributes) with **behaviour**
 (methods). This module works through its three pillars:
 

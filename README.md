@@ -3,19 +3,20 @@
 ![Python 3.14+](https://img.shields.io/badge/python-3.14%2B-blue)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
-Exercise code for **AIN3005 – Advanced Python Programming** (2026–2027 academic year).
+Lecture notes and exercise code for **AIN3005 – Advanced Python Programming** (2026–2027 academic year).
 
 The course is organised in modules, one folder each. A module is a sequence of short, self-contained scripts that
 build on one topic. Every exercise opens with a one-line docstring saying what it demonstrates, so the recommended way
 to study is: **read the script, predict its output, run it, then change it.**
 
 Each module folder has its own README: a full guide that explains every exercise, shows its expected output and
-suggests experiments to try.
+suggests experiments to try. The lecture slides for all eleven modules are in [`lecture-notes/`](lecture-notes).
 
 ## Contents
 
 - [Quick start](#quick-start)
 - [Modules at a glance](#modules-at-a-glance)
+- [Lecture notes](#lecture-notes)
 - [Repository layout](#repository-layout)
 - [Working with the code](#working-with-the-code)
 - [Module summaries](#module-summaries)
@@ -56,10 +57,30 @@ Then run the commands above without the `uv run` prefix.
 | [Module 03](module03/README.md) | Unit testing | testing a small banking domain in isolation | pytest fixtures, parametrization, `pytest.raises`, pytest-mock, coverage |
 | [Module 04](module04/README.md) | Files and serialization | storing the same data in six formats | `pathlib`, `pickle`, `json`, `csv`, pandas, Protocol Buffers |
 
+## Lecture notes
+
+The slides for the whole course are PDFs in [`lecture-notes/`](lecture-notes). Exercise code is available for
+modules 01–04.
+
+| Module | Lecture notes | Exercises |
+|---|---|---|
+| 01 | [Object-Oriented Programming in Python](lecture-notes/module01-object-oriented.programming.in.python.pdf) | [module01](module01/README.md) |
+| 02 | [Functional Programming in Python](lecture-notes/module02-functional.programming.in.python.pdf) | [module02](module02/README.md) |
+| 03 | [Unit Testing in Python Using pytest](lecture-notes/module03-unit.testing.in.python.using.pytest.pdf) | [module03](module03/README.md) |
+| 04 | [File Operations in Python](lecture-notes/module04-file.operations.in.python.pdf) | [module04](module04/README.md) |
+| 05 | [Thread Programming](lecture-notes/module05-thread.programming.pdf) | — |
+| 06 | [Introduction to Software Architectures](lecture-notes/module06-introduction.to.software.architectures.pdf) | — |
+| 07 | [MongoDB Programming in Python](lecture-notes/module07-mongodb.programming.in.python.pdf) | — |
+| 08 | [Designing and Implementing RESTful APIs in Python Using Flask and FastAPI](lecture-notes/module08-designing.and.implementing.restful.apis.in.python.using.flask.and.fast.api.pdf) | — |
+| 09 | [Event-Driven Architecture](lecture-notes/module09-event-driven.architecture.pdf) | — |
+| 10 | [Reactive Programming with RxPY](lecture-notes/module10-reactive.programming.rxpy.pdf) | — |
+| 11 | [Python Performance Tuning and Optimization](lecture-notes/module11-python.performance.tuning.and.optimization.pdf) | — |
+
 ## Repository layout
 
 ```text
 .
+├── lecture-notes/              lecture slides for modules 01–11 (PDF)
 ├── module01/                   object-oriented programming
 │   └── README.md               the module guide (every module has one)
 ├── module02/                   functional programming

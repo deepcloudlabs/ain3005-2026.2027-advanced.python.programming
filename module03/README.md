@@ -2,6 +2,8 @@
 
 [← Module 02](../module02/README.md) · [Course overview](../README.md) · [Module 04 →](../module04/README.md)
 
+**Lecture notes:** [Unit Testing in Python Using pytest](../lecture-notes/module03-unit.testing.in.python.using.pytest.pdf) (PDF)
+
 A **unit test** checks one small unit of code, usually a class or a function, automatically and in isolation. A
 good suite catches regressions the moment they appear and documents how the code is meant to behave. This module
 pairs a small banking domain, the [`banking`](banking) package, with a [pytest](https://docs.pytest.org/) suite in
