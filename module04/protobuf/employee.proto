@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package hr;
+
+// One employee record
+message Employee {
+  string name = 1;
+  string department = 2;
+  int32 salary = 3;
+  int32 birth_year = 4;
+  bool full_time = 5;
+  Address address = 6;
+
+  message Address {
+    string city = 1;
+    string country = 2;
+  }
+}
+
+message Employees {
+  repeated Employee employees = 1;
+}

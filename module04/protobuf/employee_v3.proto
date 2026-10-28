@@ -1,0 +1,31 @@
+// Version 3 of employee.proto: full_time is deleted and replaced by the
+// Contract enum. Its number and name are reserved, so protoc rejects any
+// field that tries to reuse them.
+syntax = "proto3";
+
+package hr.v3;
+
+enum Contract {
+  CONTRACT_UNSPECIFIED = 0;
+  CONTRACT_FULL_TIME = 1;
+  CONTRACT_PART_TIME = 2;
+}
+
+message Employee {
+  reserved 5;                  // was: bool full_time
+  reserved "full_time";
+
+  string name = 1;
+  string department = 2;
+  int32 salary = 3;
+  int32 birth_year = 4;
+  Address address = 6;
+  repeated string skills = 7;
+  Contract contract = 8;       // replaces full_time
+  optional string email = 9;
+
+  message Address {
+    string city = 1;
+    string country = 2;
+  }
+}

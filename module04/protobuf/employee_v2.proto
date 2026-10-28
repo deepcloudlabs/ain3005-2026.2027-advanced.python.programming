@@ -1,0 +1,29 @@
+// Version 2 of employee.proto: adds a repeated field, an enum and an
+// optional field. Its own package (hr.v2) lets evolution_demo.py load
+// both versions in one program.
+syntax = "proto3";
+
+package hr.v2;
+
+enum Contract {
+  CONTRACT_UNSPECIFIED = 0;    // must be 0
+  CONTRACT_FULL_TIME = 1;
+  CONTRACT_PART_TIME = 2;
+}
+
+message Employee {
+  string name = 1;
+  string department = 2;
+  int32 salary = 3;
+  int32 birth_year = 4;
+  bool full_time = 5;
+  Address address = 6;
+  repeated string skills = 7;  // a list
+  Contract contract = 8;       // an enum
+  optional string email = 9;   // has presence
+
+  message Address {
+    string city = 1;
+    string country = 2;
+  }
+}
