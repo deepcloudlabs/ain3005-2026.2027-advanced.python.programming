@@ -191,6 +191,53 @@ protoc --python_out=. employee.proto
 To keep old files readable, add new fields with **new** numbers, and never reuse or renumber an existing field. A
 field that's missing from older data reads as its default value: `0`, `""` or `False`.
 
+### Protocol Buffers in depth: the [`protobuf/`](protobuf) folder
+
+Section 9 of the lecture slides, *Protocol Buffers in Python*, goes further than exercises 11–12. Each of its code
+examples is a script here, with the output shown on the slide:
+
+| Script | Slide | What it shows |
+|---|---|---|
+| `wire_format.py` | Field Types and Field Numbers | `Employee(name="kim", salary=150)` takes 8 bytes; the same data as JSON takes 30. |
+| `generated_classes.py` | From `.proto` to Python Classes | The full names and field-number constants that `protoc` generates. |
+| `round_trip.py` | Serializing and Deserializing Messages | `SerializeToString()`, `ParseFromString()` and `FromString()`, with a nested message. |
+| `employee_store.py` | Writing Messages to a Binary File | `save()`/`load()` with `"wb"`/`"rb"`, a temporary file plus `replace()`, `FileNotFoundError` and `DecodeError`. |
+| `json_vs_protobuf.py` | Protobuf Binary Files Versus JSON Text Files | 720 bytes of JSON against 197 of Protobuf; dicts against typed objects. |
+| `new_fields.py` | Repeated Fields, Enums and `optional` | `repeated`, an enum, `optional` and `HasField()`. |
+| `evolution_demo.py` | Schema Evolution | Version 2 reads version-1 bytes, and version 1 keeps the fields it doesn't know. |
+| `compare_formats.py` | Protobuf Versus JSON, XML and pickle | The sizes and write + read timings behind the comparison table. Timings vary by machine. |
+| `gradebook_tool.py` | A Grade Book in Protocol Buffers | The solution to the hands-on exercise: `grades.csv` in, `gradebook.bin` out. |
+
+The schemas:
+
+- [`employee.proto`](protobuf/employee.proto): version 1, package `hr`, with a nested `Address` message.
+- [`employee_v2.proto`](protobuf/employee_v2.proto): adds `repeated string skills = 7`, a `Contract` enum and
+  `optional string email = 9`. It uses the package `hr.v2` only so that `evolution_demo.py` can import both versions
+  at once; on the slides, both versions are called `employee.proto`.
+- [`employee_v3.proto`](protobuf/employee_v3.proto): deletes `full_time` and reserves its number and name.
+- [`gradebook.proto`](protobuf/gradebook.proto): `Student` and `GradeBook` for the exercise.
+
+Run the scripts by file path, from any directory. They write their files into `protobuf/output/`, which git ignores:
+
+```bash
+uv run python module04/protobuf/employee_store.py
+```
+
+The scripts wrap the slide code in `main()` and use `output/` paths; otherwise the code is the same. The `*_pb2.py`
+files were generated with the bundled `protoc.exe`, so, like `employee_pb2.py`, they need protobuf 6.32.1 or newer.
+Regenerate them after editing a schema:
+
+```bash
+cd module04/protobuf
+../protoc.exe -I. --python_out=. --pyi_out=. employee.proto employee_v2.proto employee_v3.proto gradebook.proto
+```
+
+On macOS and Linux, use `pip install grpcio-tools` and `python -m grpc_tools.protoc` with the same arguments. A
+newer compiler generates code that needs a newer runtime; `uv sync` installs a recent enough protobuf.
+
+Try it: add `bool remote = 5;` to `employee_v3.proto` and regenerate. `protoc` stops with
+`Field "remote" uses reserved number 5.`
+
 ## Comparing the formats
 
 | Format | Kind | What comes back | Other languages | Size* |
