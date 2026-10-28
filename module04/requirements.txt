@@ -1,0 +1,3 @@
+pandas
+openpyxl
+protobuf>=6.32.1

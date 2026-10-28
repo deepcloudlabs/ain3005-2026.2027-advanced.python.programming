@@ -1,0 +1,22 @@
+[project]
+name = "ain3005-2026-2027-advanced-python-programming"
+version = "0.1.0"
+description = "AIN3005: Advanced Python Programming - course exercises"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "openpyxl",
+    "pandas",
+    "protobuf>=6.32.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "pytest-mock",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["module03"]
+testpaths = ["module03/tests"]
